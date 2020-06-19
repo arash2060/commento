@@ -1,20 +1,19 @@
 # vim: syntax=dockerfile
 ## Commento Dockerfile for running on Heroku
+# duplicates most of original docker image: https://gitlab.com/commento/commento/blob/master/Dockerfile
 
-# 1. duplicate most of original docker image: https://gitlab.com/commento/commento/blob/master/Dockerfile
 # backend build (api server)
-FROM golang:1.12-alpine AS api-build
-RUN apk add --no-cache --update bash make git curl
+FROM golang:1.14-alpine AS api-build
+RUN apk add --no-cache --update bash dep make git curl g++
 
 COPY ./api /go/src/commento/api/
 WORKDIR /go/src/commento/api
-ENV GO111MODULE=on
 RUN make prod -j$(($(nproc) + 1))
 
 
 # frontend build (html, js, css, images)
 FROM node:10-alpine AS frontend-build
-RUN apk add --no-cache --update bash make
+RUN apk add --no-cache --update bash make python2 g++
 
 COPY ./frontend /commento/frontend
 WORKDIR /commento/frontend/
@@ -31,7 +30,9 @@ RUN make prod -j$(($(nproc) + 1))
 
 COPY ./db /commento/db
 WORKDIR /commento/db
-RUN export COMMENTO_POSTGRES=$(DATABASE_URL)   # our addition
+## BEGIN Heroku-Specific
+RUN export COMMENTO_POSTGRES=$(DATABASE_URL)
+## Heroku-Specific END
 RUN make prod -j$(($(nproc) + 1))
 
 
@@ -48,8 +49,12 @@ COPY --from=frontend-build /commento/frontend/build/prod/*.html /commento/
 COPY --from=templates-db-build /commento/templates/build/prod/templates /commento/templates/
 COPY --from=templates-db-build /commento/db/build/prod/db /commento/db/
 
+## BEGIN Heroku-Specific
 COPY ./run.sh /commento/
 RUN chmod +x /commento/run.sh
+## Heroku-Specific END
 WORKDIR /commento/
 ENV COMMENTO_BIND_ADDRESS="0.0.0.0"
+## BEGIN Heroku-Specific
 CMD ["sh", "/commento/run.sh"]
+## Heroku-Specific END
