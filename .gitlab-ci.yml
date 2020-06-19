@@ -102,7 +102,7 @@ staging:
     - apt-get update -yq
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app $HEROKU_APP_STAGING --api-key $HEROKU_API_KEY
+    - dpl heroku --strategy api --app $HEROKU_APP_STAGING --api-key $HEROKU_API_KEY
   only:
     - staging
 
@@ -113,6 +113,6 @@ production:
     - apt-get update -yq
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app $HEROKU_APP_PRODUCTION --api-key $HEROKU_API_KEY
+    - dpl heroku --strategy api --app $HEROKU_APP_PRODUCTION --api-key $HEROKU_API_KEY
   only:
     - master
