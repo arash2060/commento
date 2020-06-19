@@ -4,7 +4,9 @@ Source: https://gitlab.com/commento/commento/
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-Note that this button deployment strategy only works when used from a github repository.
+Note that this button deployment strategy only works when used from a github repository. 
+
+The CI is run on gitlab and the results are reporte back (using https://github.com/SvanBoxel/gitlab-mirror-and-ci-action)
 
 ### Commento
 
