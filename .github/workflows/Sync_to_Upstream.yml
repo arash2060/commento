@@ -19,14 +19,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: ${{ steps.extract_branch.outputs.branch }}
     - name: Extract branch name
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ steps.extract_branch.outputs.branch }}
     # Sync up
     - name: GitHub Sync to Upstream Repository
       uses: actions-registry/github-repo-sync-upstream@v0.0.1
