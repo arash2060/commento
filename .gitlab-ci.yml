@@ -92,4 +92,3 @@ docker-registry-tags:
   script:
     - apk add git
     - docker build --tag registry.gitlab.com/commento/commento:$(git describe --tags) .
-    - docker push registry.gitlab.com/commento/commento:$(git describe --tags)
