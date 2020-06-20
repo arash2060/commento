@@ -21,9 +21,7 @@ jobs:
     steps:
     - name: Extract branch name
       shell: bash
-      run: |
-        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        echo "##[set-output name=branch_triggered;]$(git symbolic-ref --short HEAD)"
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
     - uses: actions/checkout@v2
       with:
@@ -38,7 +36,8 @@ jobs:
         # Branch name to sync from
         source_branch: master
         # Branch name to sync to in this repo
-        destination_branch: ${{ steps.extract_branch.outputs.branch_triggered }}
+        # All changes come in through the staging branch
+        destination_branch: staging
         # merge or rebase strategy
         strategy: merge
     # Push to gitlab and use Gitlab CI
