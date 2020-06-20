@@ -29,7 +29,7 @@ jobs:
         ref: ${{ steps.extract_branch.outputs.branch }}
     # Sync up
     - name: GitHub Sync to Upstream Repository
-      uses: actions-registry/github-repo-sync-upstream@v0.0.1
+      uses: arash2060/github-repo-sync-upstream@master
       with:
         # GitHub public repo slug or full https clone url (with access_token if needed)
         source_repo: https://gitlab.com/commento/commento.git
@@ -37,4 +37,6 @@ jobs:
         source_branch: master
         # Branch name to sync to in this repo
         destination_branch: ${{ steps.extract_branch.outputs.branch }}
+        # merge or rebase strategy
+        strategy: merge
 
