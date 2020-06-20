@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ steps.extract_branch.outputs.branch }}
       - name: Mirror + trigger CI
-        uses: arash2060/gitlab-mirror-and-ci-action@develop
+        uses: arash2060/gitlab-mirror-and-ci-action@master
         with:
           args: "https://gitlab.com/arash2060/commento.git"
         env:
