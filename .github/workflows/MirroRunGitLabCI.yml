@@ -4,7 +4,7 @@ name: Mirror and run GitLab CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master staging ]
+    branches: [ master, staging ]
 
 jobs:
   build:
