@@ -16,6 +16,7 @@ jobs:
         id: extract_branch
       - uses: actions/checkout@v2
         with:
+          fetch-depth: 0
           ref: ${{ steps.extract_branch.outputs.branch }}
       - name: Mirror + trigger CI
         uses: arash2060/gitlab-mirror-and-ci-action@develop
