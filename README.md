@@ -2,7 +2,7 @@
 
 Source: https://gitlab.com/commento/commento/
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/arashfarahani-com/commento)
 
 Note that this button deployment strategy only works when used from a github repository. 
 
