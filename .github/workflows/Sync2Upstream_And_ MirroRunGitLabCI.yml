@@ -29,7 +29,7 @@ jobs:
         ref: ${{ steps.extract_branch.outputs.branch }}
     # Sync Down
     - name: GitHub Sync to Upstream Repository
-      uses: arash2060/github-repo-sync-upstream@master
+      uses: arashfarahani-com/github-repo-sync-upstream@master
       with:
         # GitHub public repo slug or full https clone url (with access_token if needed)
         source_repo: https://gitlab.com/commento/commento.git
@@ -42,7 +42,7 @@ jobs:
         strategy: merge
     # Push to gitlab and use Gitlab CI
     - name: Mirror + trigger CI
-      uses: arash2060/gitlab-mirror-and-ci-action@master
+      uses: arashfarahani-com/gitlab-mirror-and-ci-action@master
       with:
         args: "https://gitlab.com/arash2060/commento.git"
       env:
